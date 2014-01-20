@@ -44,10 +44,10 @@ function checkCol($scope) {
 			checker.push($scope.board[subArray][element]);
 		}
 		if (checker.join("") == ["XXX"]) {
-			setTimeout(function() {win("x")},1500);
+			win("x");
 		}
 		else if (checker.join("") == ["OOO"]) {
-			setTimeout(function() {win("o")},1500);
+			win("o");
 		}
 
 	}
@@ -56,11 +56,10 @@ function checkCol($scope) {
 var checkRows = function($scope) {
 	for (i=0; i<$scope.board.length; i+=1) {
 		if ($scope.board[i].join("") == "XXX") {
-			console.log("x wins");
-			setTimeout(function() {win("x")},1500);
+			win("x");
 		}
 		else if ($scope.board[i].join("") == ["OOO"]) {
-			setTimeout(function() {win("o")},1500);
+			win("o");
 		}
 	}
 };
@@ -71,10 +70,10 @@ var checkCross = function ($scope) {
 		checker.push($scope.board[i][i]);
 	}
 	if (checker.join("") == ["XXX"]) {
-		setTimeout(function() {win("x")},1500);
+		win("x");
 	}
 	else if (checker.join("") == ["OOO"]) {
-		setTimeout(function() {win("o")},1500);
+		win("o");
 	}
 };
 
@@ -86,30 +85,32 @@ var checkCross2 = function ($scope) {
 		subArray +=1;
 	}
 	if (checker.join("") == ["XXX"]) {
-		setTimeout(function() {win("x")},1500);
+		win("x");
 	}
 	else if (checker.join("") == ["OOO"]) {
-		setTimeout(function() {win("o")},1500);
+		win("o");
 	}
 };
 
 
 function win(player) {
-	reset();
-	var rows = document.getElementsByClassName('row');
-	for (i=0; i<rows.length; i++)
-		rows[i].style.display = "none";
-	var winText = document.createElement('div');
-	winText.className += "winText";
-	if(player == "x") {
-		winText.innerHTML = "X Wins";
-	}
-	else {
-		winText.innerHTML = "O Wins";
-	}
-	var frame = document.getElementById('frame');
-	frame.appendChild(winText);
-}	
+	setTimeout( function() {
+		reset();
+		var rows = document.getElementsByClassName('row');
+		for (i=0; i<rows.length; i++)
+			rows[i].style.display = "none";
+		var winText = document.createElement('div');
+		winText.className += "winText";
+		if(player == "x") {
+			winText.innerHTML = "X Wins";
+		}
+		else {
+			winText.innerHTML = "O Wins";
+		}
+		var frame = document.getElementById('frame');
+		frame.appendChild(winText);
+	},1000);
+}
 
 
 
