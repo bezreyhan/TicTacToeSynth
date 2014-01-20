@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html x-ng-app="">
+	<head>
+		<title>Synth</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
+		<script type="text/javascript" src="main.js"></script>	
+	</head>
+	<body x-ng-controller="gameCtrl">
+		<div id="robot">
+			<div id="buttons">
+				<button id="buttonR" onclick="openUp()">Start Game</button>
+				<button id="buttonL" onclick="reset()">New Game</button>
+			</div>
+			<p id="nose"> > </p>	
+	 		<div id="frame">
+	 			<div x-ng-repeat="row in board track by $index" class="row clear" x-ng-init="rowIndex=$index">
+	 				<div x-ng-repeat="cell in row track by $index" x-ng-click="clicked(rowIndex,$index)" class="cell">{{cell}}</div>
+	 			</div>	
+	 		</div>
+	 	</div>	
+ 	</body>		
+</html>
