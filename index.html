@@ -7,15 +7,27 @@
 		<script type="text/javascript" src="main.js"></script>	
 	</head>
 	<body x-ng-controller="gameCtrl">
+		<div id="scoreBoard">
+			<div id="leftScore"></div>
+			<div id="rightScore"></div>
+		</div>
+		<div>
+			<h2>X-Score</h2>
+			<span>{{xScore}}</span>
+		</div>
+		<div>
+			<h2>O-Score</h2>
+			<span>{{oScore}}</span>
+		</div>
 		<div id="robot">
 			<div id="buttons">
-				<button id="buttonR" onclick="openUp()">Start Game</button>
+				<button id="buttonR" x-ng-click="openUp()">Start Game</button>
 				<button id="buttonL" onclick="reset()">New Game</button>
 			</div>
 			<p id="nose"> > </p>	
 	 		<div id="frame">
 	 			<div x-ng-repeat="row in board track by $index" class="row clear" x-ng-init="rowIndex=$index">
-	 				<div x-ng-repeat="cell in row track by $index" x-ng-click="clicked(rowIndex,$index)" class="cell">{{cell}}</div>
+	 				<div x-ng-repeat="cell in row track by $index" x-ng-click="clicked(rowIndex,$index)" class="cell">&nbsp;{{cell}}</div>
 	 			</div>	
 	 		</div>
 	 	</div>	
