@@ -10,11 +10,11 @@ function gameCtrl($scope) {
 			$scope.piece.value = ($scope.piece.value=="O"?"X":"O");
 			$scope.board[row][cell] = $scope.piece.value;
 		}
+		$scope.counter +=1;
 		checkRows($scope);
 		checkCol($scope);
 		checkCross($scope);
 		checkCross2($scope);
-		$scope.counter +=1;
 		//cats game is checked in checkCross2
 	};
 
@@ -44,7 +44,8 @@ function gameCtrl($scope) {
 }
 
 
-function reset() {
+function reset($scope) {
+	$scope.board = [['','',''], ['','',''], ['','','']];
 	var cells = document.getElementsByClassName('cell');
 	for (i=0; i<cells.length; i++) {
 		cells[i].style.width = "0";
@@ -102,6 +103,7 @@ var checkCross = function ($scope) {
 var checkCross2 = function ($scope) {
 	checker = [];
 	subArray = 0;
+	console.log("checkcross2")
 	for (var i=2; i>=0; i-=1) {
 		checker.push($scope.board[subArray][i]);
 		subArray +=1;
@@ -114,8 +116,10 @@ var checkCross2 = function ($scope) {
 		win($scope, "o");
 		return null;
 	}
+	console.log($scope.counter)
 	if ($scope.counter === 9) {
-		win("cat");
+		console.log($scope.counter);
+		win($scope, "cat");
 	}
 };
 
@@ -125,7 +129,7 @@ var checkCross2 = function ($scope) {
 
 function win($scope, player) {
 	setTimeout( function() {
-		reset();
+		reset($scope);
 		var rows = document.getElementsByClassName('row');
 		for (i=0; i<rows.length; i++)
 			rows[i].style.display = "none";
@@ -143,7 +147,7 @@ function win($scope, player) {
 				$scope.oScore += 1;
 			});
 		}
-		else {
+		else if (player == "cat") {
 			winText.innerHTML = "Cats Game";
 		}
 		var frame = document.getElementById('frame');
